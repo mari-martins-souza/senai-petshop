@@ -1,30 +1,40 @@
 package br.senai.lab365.petshop.controller;
 
+import br.senai.lab365.petshop.model.Tutor;
 import org.springframework.web.bind.annotation.*;
+import java.util.*;
 
 @RestController
 @RequestMapping("/tutores")
 
 public class TutorController {
 
+    private List<Tutor> tutores = new ArrayList<>();
+
     @PostMapping
-    public String createTutor() {
-        return "Endpoint para criar um novo Tutor";
+    public Tutor createTutor(@RequestBody Tutor tutor) {
+        tutores.add(tutor);
+        return tutor;
     }
 
     @GetMapping
-    public String readTutor() {
-        return "Endpoint para ler informações do Tutor";
+    public List<Tutor> readTutor() {
+        return tutores;
     }
 
     @PutMapping
-    public String updateTutor() {
-        return "Endpoint para atualizar informações do Tutor";
+    public Tutor updateTutor(@RequestBody Tutor tutor) {
+        int index = tutores.indexOf(tutor);
+        if (index != -1) {
+            tutores.set(index, tutor);
+            return tutor;
+        }
+        return null;
     }
 
     @DeleteMapping
-    public String deleteTutor() {
-        return "Endpoint para deletar um Tutor";
+    public boolean deleteTutor(@RequestBody Tutor tutor) {
+        return tutores.remove(tutor);
     }
-
 }
+
