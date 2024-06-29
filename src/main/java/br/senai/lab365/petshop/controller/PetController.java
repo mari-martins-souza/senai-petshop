@@ -1,5 +1,7 @@
 package br.senai.lab365.petshop.controller;
 
+import br.senai.lab365.petshop.service.PetService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import br.senai.lab365.petshop.model.Pet;
@@ -9,31 +11,26 @@ import br.senai.lab365.petshop.model.Pet;
 
 public class PetController {
 
-    private List<Pet> pets = new ArrayList<>();
+    @Autowired
+    private PetService petService;
 
     @PostMapping
     public Pet createPet(@RequestBody Pet pet) {
-        pets.add(pet);
-        return pet;
+        return petService.createPet(pet);
     }
 
     @GetMapping
     public List<Pet> readPet() {
-        return pets;
+        return petService.getAllPets();
     }
 
     @PutMapping
     public Pet updatePet(@RequestBody Pet pet) {
-        int index = pets.indexOf(pet);
-        if (index != -1) {
-            pets.set(index, pet);
-            return pet;
-        }
-        return null;
+        return petService.updatePet(pet);
     }
 
     @DeleteMapping
     public boolean deletePet(@RequestBody Pet pet) {
-        return pets.remove(pet);
+        return petService.deletePet(pet);
     }
 }
