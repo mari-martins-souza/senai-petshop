@@ -1,12 +1,20 @@
 package br.senai.lab365.petshop.model;
 
 public class Tutor {
+
+    private static int nextId = 1;
+    private int id;
     private String nome;
     private String endereco;
 
     public Tutor(String nome, String endereco) {
+        this.id = nextId++;
         this.nome = nome;
         this.endereco = endereco;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNome() {

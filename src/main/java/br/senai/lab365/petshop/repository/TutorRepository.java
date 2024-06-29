@@ -9,6 +9,15 @@ import java.util.*;
 public class TutorRepository {
     private List<Tutor> tutores = new ArrayList<>();
 
+    public Tutor findById(int id) {
+        for (Tutor tutor : tutores) {
+            if (tutor.getId() == id) {
+                return tutor;
+            }
+        }
+        return null;
+    }
+
     public Tutor save(Tutor tutor) {
         tutores.add(tutor);
         return tutor;
